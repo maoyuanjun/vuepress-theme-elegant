@@ -5,6 +5,7 @@
             type="primary"
             circle
             class="toc-btn"
+            :style="{backgroundColor: btnBgColor}"
     >
       <i class="iconfont icon-service-directory"></i>
     </el-button>
@@ -14,12 +15,16 @@
             type="primary"
             circle
             class="gotop-btn"
+            :style="{backgroundColor: btnBgColor}"
     >
       <i class="el-icon-arrow-up"></i>
     </el-button>
   </span>
 </template>
 <script>
+
+    import themeStyle from '../style/index';
+
     export default {
         name: "GoTop",
         data() {
@@ -29,6 +34,12 @@
         },
         mounted() {
             this.hasShow();
+        },
+        computed: {
+            btnBgColor() {
+                const style = this.$themeConfig.style || 'classical';
+                return themeStyle[style].goTopBgColor;
+            }
         },
         methods: {
             OpenToc() {
@@ -67,12 +78,11 @@
     .gotop-btn,
     .toc-btn {
         position: fixed;
-        right: 15px;
-        bottom: 10px;
+        right: 30px;
+        bottom: 30px;
         z-index: 69;
         color: #fff;
-        background-color: #a88895;
-        border-color: #a88895;
+        border: 1px solid transparent;
         box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
         0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 
@@ -107,5 +117,13 @@
     .show {
         opacity: 1;
         transform: scale(1);
+    }
+
+    @media only screen and (max-width: 767px) {
+      .gotop-btn,
+      .toc-btn {
+        right: 15px;
+        bottom: 10px;
+      }
     }
 </style>

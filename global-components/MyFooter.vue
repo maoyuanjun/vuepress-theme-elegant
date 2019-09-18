@@ -1,5 +1,5 @@
 <template>
-    <el-row class="container-footer">
+    <el-row class="container-footer" :style="{backgroundColor: footerBgColor}">
         <el-row
             :class="{footerMargin: !isHide}"
             type="flex"
@@ -52,6 +52,9 @@
     </el-row>
 </template>
 <script>
+
+    import themeStyle from '../style/index';
+
     export default {
         name: "MyFooter",
         props: {
@@ -62,6 +65,12 @@
             content: {
                 type: Array,
                 default: () => []
+            }
+        },
+        computed: {
+            footerBgColor() {
+                const style = this.$themeConfig.style || 'classical';
+                return themeStyle[style].color;
             }
         }
     };
@@ -75,7 +84,6 @@
         text-align: center;
         width: 100%;
         line-height: 1.6;
-        background-color: #705959;
         .footerMargin .footer-top, .footerMargin .footer-bottom {
             margin-left: 122px;
         }

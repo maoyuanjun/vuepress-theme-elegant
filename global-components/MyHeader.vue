@@ -59,6 +59,7 @@
                             <span
                                 class="addr addr-active"
                                 v-if="hasResults"
+                                :style="{backgroundColor: addrActiveColor}"
                             >
                                 {{ item.strippedContent.slice(item.searchIndex, item.searchIndex + queryStrlen) }}
                             </span>
@@ -76,6 +77,9 @@
     </el-row>
 </template>
 <script>
+
+    import themeStyle from '../style/index';
+
     export default {
         name: 'Header',
         props: {
@@ -94,6 +98,10 @@
             };
         },
         computed: {
+            addrActiveColor() {
+                const style = this.$themeConfig.style || 'classical';
+                return themeStyle[style].color;
+            },
             placeholder() {
                 return this.$themeConfig.placeholder || '';
             },
@@ -189,7 +197,6 @@
         width: 50%;
         padding-top: 24px;
         padding-bottom: 4px;
-        background-color: #705959;
     }
 
     .iconfont {
@@ -198,13 +205,12 @@
 
     .top-header .el-button--primary {
         background-color: rgba(0,0,0, .2);
-        border: 1px solid #715959;
+        border: 1px solid transparent;
     }
 
     .top-header .el-button--primary:hover {
         cursor: pointer;
-        border: 1px solid #715959;
-        background-color: rgba(0,0,0, .2);
+        background-color: rgba(0,0,0, .3);
     }
 
     .search-input {
@@ -256,7 +262,7 @@
         }
 
         .addr-active {
-            background-color: #715959;
+            /*background-color: #6e7f76;*/
             border-radius: 3px;
             color: #fff;
             padding: 0 3px 0 2px;

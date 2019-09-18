@@ -1,10 +1,8 @@
 <template>
     <div style="height:100%">
-        <el-container class="main-container">
-
+        <el-container class="main-container" :style="{backgroundColor: containerBgColor}">
             <!-- 侧边栏 -->
             <my-aside :isHide="isHide"></my-aside>
-
             <el-container class="container-warp">
                 <!-- 头部栏 包括关闭和搜索组件 -->
                 <my-header
@@ -18,24 +16,21 @@
                         :content="content"
                 ></my-main>
             </el-container>
-
             <go-top></go-top>
         </el-container>
-
         <my-footer
                 :content="content"
                 :isHide="isHide"
         ></my-footer>
-
         <div
                 @click="close"
                 class="overlay"
                 :class="{'overlay--active': needOverlay}"
         ></div>
-
     </div>
 </template>
 <script>
+    import themeStyle from '../style/index';
     import content from "imData/content.js";
 
     export default {
@@ -47,6 +42,14 @@
                 content: content
             };
         },
+
+        computed: {
+            containerBgColor() {
+                const style = this.$themeConfig.style || 'classical';
+                return themeStyle[style].color;
+            }
+        },
+
         methods: {
             clickMenu() {
                 this.isHide = !this.isHide;
@@ -65,13 +68,11 @@
 <style lang="stylus" scoped>
     .main-container {
         min-height: 100%;
-        /*border 4px solid red !important;*/
     }
 
     .container-warp {
         position: relative;
         overflow: hidden;
-        background-color: #715959;
     }
 
     .overlay {

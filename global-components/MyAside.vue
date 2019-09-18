@@ -34,7 +34,15 @@
                 </div>
             </li>
             <!-- 菜单信息 -->
-            <el-menu-item index="/">
+            <el-menu-item
+                index="/"
+                :class="{
+                    'classical-theme': isClassicalBg(),
+                    'lively-theme': isLivelyBg(),
+                    'deep-theme': isDeepBg(),
+                    'fresh-theme': isFreshBg()
+                }"
+            >
                 <span class="item-split-wrap"></span>
                 <i class="iconfont icon-home"></i>
                 <span
@@ -42,7 +50,15 @@
                         slot="title"
                 >{{$themeConfig.menus.home || '主页'}}</span>
             </el-menu-item>
-            <el-menu-item index="/tags/">
+            <el-menu-item
+                index="/tags/"
+                :class="{
+                    'classical-theme': isClassicalBg(),
+                    'lively-theme': isLivelyBg(),
+                    'deep-theme': isDeepBg(),
+                    'fresh-theme': isFreshBg()
+                }"
+            >
                 <span class="item-split-wrap"></span>
                 <i class="iconfont icon-biaoqian"></i>
                 <span
@@ -50,7 +66,15 @@
                         slot="title"
                 >{{$themeConfig.menus.tags || '标签分类'}}</span>
             </el-menu-item>
-            <el-menu-item index="/all/">
+            <el-menu-item
+                index="/all/"
+                :class="{
+                    'classical-theme': isClassicalBg(),
+                    'lively-theme': isLivelyBg(),
+                    'deep-theme': isDeepBg(),
+                    'fresh-theme': isFreshBg()
+                }"
+            >
                 <span class="item-split-wrap"></span>
                 <i class="iconfont icon-wenzhang"></i>
                 <span
@@ -59,8 +83,14 @@
                 >{{$themeConfig.menus.all || '时间归档'}}</span>
             </el-menu-item>
             <el-menu-item
-                    index="/github/"
-                    v-if="$themeConfig.github"
+                index="/github/"
+                v-if="$themeConfig.github"
+                :class="{
+                    'classical-theme': isClassicalBg(),
+                    'lively-theme': isLivelyBg(),
+                    'deep-theme': isDeepBg(),
+                    'fresh-theme': isFreshBg()
+                }"
             >
                 <span class="item-split-wrap"></span>
                 <i class="iconfont icon-github"></i>
@@ -69,7 +99,15 @@
                         slot="title"
                 >{{$themeConfig.menus.github || 'GitHub'}}</span>
             </el-menu-item>
-            <el-menu-item index="/about/">
+            <el-menu-item
+                index="/about/"
+                :class="{
+                    'classical-theme': isClassicalBg(),
+                    'lively-theme': isLivelyBg(),
+                    'deep-theme': isDeepBg(),
+                    'fresh-theme': isFreshBg()
+                }"
+            >
                 <span class="item-split-wrap"></span>
                 <i class="iconfont icon-aboutme"></i>
                 <span
@@ -91,6 +129,37 @@
             }
         },
         methods: {
+            getThemeStyle() {
+                return this.$themeConfig.style || 'classical';
+            },
+            isClassicalBg() {
+                const style = this.getThemeStyle();
+                if (style === 'classical') {
+                    return true;
+                }
+                return false;
+            },
+            isLivelyBg() {
+                const style = this.getThemeStyle();
+                if (style === 'lively') {
+                    return true;
+                }
+                return false;
+            },
+            isDeepBg() {
+                const style = this.getThemeStyle();
+                if (style === 'deep') {
+                    return true;
+                }
+                return false;
+            },
+            isFreshBg() {
+                const style = this.getThemeStyle();
+                if (style === 'fresh') {
+                    return true;
+                }
+                return false;
+            },
             select(key) {
                 if (key === "/github/") {
                     window.open(this.$themeConfig.github);
@@ -108,13 +177,6 @@
 
     .el-menu-item.is-active {
         background-color: #ECEEF8;
-    }
-
-    .el-menu-item:hover {
-        color: #3f51b5;
-        i {
-            color: #3f51b5;
-        }
     }
 
     .iconfont {
@@ -143,7 +205,6 @@
         background: #fff;
         will-change: transform, -webkit-transform;
         transition: 0.2s ease-in-out;
-        /*border 1px solid red;*/
     }
 
     .menuHide .menu-wrap {
@@ -157,13 +218,11 @@
 
     .menu .brand-wrap {
         height 240px;
-        /*border: 1px solid red;*/
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
 
     .menu .brand {
-        /*padding: 41px 24px 24px;*/
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -177,12 +236,10 @@
     }
 
     .menu .avatar {
-        /*border 1px solid red;*/
         transition: 0.2s ease-in-out;
         width: 78px;
         height: 78px;
         margin-top: 44px;
-        /*border: 2px solid #fff;*/
         border-radius: 50%;
         overflow: hidden;
     }
@@ -201,7 +258,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        /*border: 1px solid blue;*/
         margin: 1em 0 0;
         margin-top: 16px;
         color: #1e1e1e;
@@ -225,13 +281,7 @@
     }
 
     .el-menu-item {
-        /*border 1px solid blue;*/
         padding: 0 !important;
-    }
-
-    .el-menu-item.is-active{
-        background-color: #ffffff !important;
-        color: #5F4141 !important;
     }
 
     .el-menu-item.is-active .item-split-wrap {
@@ -242,28 +292,99 @@
         color: #98989F;
     }
 
-    .el-menu-item:hover, .el-menu-item:focus {
-        color: #5F4141 !important;
-        background-color: #ffffff !important;
-    }
-
     .el-menu-item i {
         margin-left: 20px;
-    }
-
-    .el-menu-item:hover i {
-        color: #5F4141 !important;
     }
 
     .item-title {
         font-size: 16px;
     }
 
-    .item-split-wrap {
+    /** classical风格 **/
+    .el-menu-item.is-active.classical-theme {
+        background-color: #ffffff !important;
+        color: #715959 !important;
+    }
+
+    .el-menu-item.classical-theme:hover, .el-menu-item.classical-theme:focus {
+        color: #715959 !important;
+        background-color: #ffffff !important;
+    }
+
+    .el-menu-item.classical-theme:hover i {
+        color: #715959 !important;
+    }
+
+    .classical-theme .item-split-wrap {
         visibility: hidden;
         padding: 8px 2px;
-        background-color: #5F4141;
+        background-color: #715959;
     }
+
+    /** lively风格 **/
+    .el-menu-item.is-active.lively-theme {
+        background-color: #ffffff !important;
+        color: #6A8075 !important;
+    }
+
+    .el-menu-item.lively-theme:hover, .el-menu-item.lively-theme:focus {
+        color: #6A8075 !important;
+        background-color: #ffffff !important;
+    }
+
+    .el-menu-item.lively-theme:hover i {
+        color: #6A8075 !important;
+    }
+
+    .lively-theme .item-split-wrap {
+        visibility: hidden;
+        padding: 8px 2px;
+        background-color: #6A8075;
+    }
+
+    /** deep风格 **/
+    .el-menu-item.is-active.deep-theme {
+        background-color: #ffffff !important;
+        color: #6C6F86 !important;
+    }
+
+    .el-menu-item.deep-theme:hover, .el-menu-item.deep-theme:focus {
+        color: #6C6F86 !important;
+        background-color: #ffffff !important;
+    }
+
+    .el-menu-item.deep-theme:hover i {
+        color: #6C6F86 !important;
+    }
+
+    .deep-theme .item-split-wrap {
+        visibility: hidden;
+        padding: 8px 2px;
+        background-color: #6C6F86;
+    }
+
+    /** fresh风格 **/
+    .el-menu-item.is-active.fresh-theme {
+        background-color: #ffffff !important;
+        color: #617B93 !important;
+    }
+
+    .el-menu-item.fresh-theme:hover, .el-menu-item.fresh-theme:focus {
+        color: #617B93 !important;
+        background-color: #ffffff !important;
+    }
+
+    .el-menu-item.fresh-theme:hover i {
+        color: #617B93 !important;
+    }
+
+    .fresh-theme .item-split-wrap {
+        visibility: hidden;
+        padding: 8px 2px;
+        background-color: #617B93;
+    }
+
+
 
     @media (max-width: 1190px) {
         .menu {

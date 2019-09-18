@@ -170,7 +170,6 @@
     }
 
     @media only screen and (max-width: 767px) {
-
         .tag-card {
             .el-tag--medium {
                 margin: 5px 5px !important;

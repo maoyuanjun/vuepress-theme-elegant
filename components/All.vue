@@ -86,7 +86,8 @@
             padding: 10px;
             border-bottom: 1px solid #ebeef5;
             .header-text {
-                color: #6d5a59;
+                color: #000000;
+                opacity: 0.6;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -112,7 +113,6 @@
             padding-bottom: 0;
             margin-bottom: 35px;
         }
-
     }
 
 </style>

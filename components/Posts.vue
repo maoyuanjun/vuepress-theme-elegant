@@ -1,42 +1,48 @@
 <template>
     <div :key="$page.title">
         <el-row
-            type="flex"
-            class="post-content"
+                type="flex"
+                class="post-content"
         >
             <el-col
-                :span="17"
-                :xs="{ span: 24 }"
-                :sm="{ span: 23 }"
-                :md="{ span: 23 }"
-                :lg="{ span: 17 }"
-                class="post-card post-sign"
-                id="post-card"
+                    :span="17"
+                    :xs="{ span: 24 }"
+                    :sm="{ span: 23 }"
+                    :md="{ span: 23 }"
+                    :lg="{ span: 17 }"
+                    class="post-card post-sign"
+                    id="post-card"
             >
                 <Content></Content>
             </el-col>
             <el-col
-                :span="6"
-                class="post-toc"
-                id="post-toc"
-                :class="{ 'open-toc': hasToc }"
+                    :span="6"
+                    class="post-toc"
+                    id="post-toc"
+                    :class="{ 'open-toc': hasToc }"
             >
                 <div class="catalog-title">目录</div>
                 <div class="catalog-body">
                     <ul
-                        id="catalog-list"
-                        class="catalog-list"
+                            id="catalog-list"
+                            class="catalog-list"
                     >
                         <li
-                            v-for="(item, index) in catalogList"
-                            :key="index"
-                            class="toc-li"
-                            :class="{ active: currentIndex === index }"
+                                v-for="(item, index) in catalogList"
+                                :key="index"
+                                class="toc-li"
+                                :class="{
+                                    active: tocExtClass(index),
+                                    'classical-theme': isClassicalBg(index),
+                                    'lively-theme': isLivelyBg(index),
+                                    'deep-theme': isDeepBg(index),
+                                    'fresh-theme': isFreshBg(index)
+                                }"
                         >
                             <a
-                                class="toc-link ellipsis"
-                                :href="'#' + item.id"
-                                :style="{ marginLeft: offsetList[index] * 14 + 'px' }"
+                                    class="toc-link ellipsis"
+                                    :href="'#' + item.id"
+                                    :style="{ marginLeft: offsetList[index] * 14 + 'px' }"
                             >
                                 {{ item.textContent.substring(2) }}
                             </a>
@@ -47,35 +53,35 @@
         </el-row>
 
         <el-row
-            type="flex"
-            class="post-nav"
+                type="flex"
+                class="post-nav"
         >
             <el-col
-                :span="8"
-                class="post-prev"
+                    :span="8"
+                    class="post-prev"
             >
                 <div v-if="!isNaN(prevPost)">
                     <router-link :to="content[prevPost].path || '/'">
                         <i class="el-icon-arrow-left"></i> Prev
                     </router-link>
                     <router-link
-                        tag="p"
-                        :to="content[prevPost].path || '/'"
-                        class="nav-title"
+                            tag="p"
+                            :to="content[prevPost].path || '/'"
+                            class="nav-title"
                     >{{ content[prevPost].title }}
                     </router-link>
                 </div>
             </el-col>
             <el-col :span="1"></el-col>
             <el-col
-                :span="8"
-                class="post-next"
+                    :span="8"
+                    class="post-next"
             >
                 <div v-if="!isNaN(nextPost)">
                     <router-link
-                        tag="p"
-                        :to="content[nextPost].path || '/'"
-                        class="nav-title"
+                            tag="p"
+                            :to="content[nextPost].path || '/'"
+                            class="nav-title"
                     >{{ content[nextPost].title }}
                     </router-link>
                     <router-link :to="content[nextPost].path || '/'">
@@ -90,6 +96,7 @@
     </div>
 </template>
 <script>
+
     import TocBtn from "imComponents/TocBtn";
 
     export default {
@@ -126,7 +133,53 @@
                 this.changeIndex();
             }, 20);
         },
+
         methods: {
+
+            getThemeStyle() {
+                return this.$themeConfig.style || 'classical';
+            },
+
+            tocExtClass(index) {
+                return this.currentIndex === index;
+            },
+
+            isClassicalBg(index) {
+                const actIndex = this.currentIndex === index;
+                const style = this.getThemeStyle();
+                if (actIndex && style === 'classical') {
+                    return true;
+                }
+                return false;
+            },
+
+            isLivelyBg(index) {
+                const actIndex = this.currentIndex === index;
+                const style = this.getThemeStyle();
+                if (actIndex && style === 'lively') {
+                    return true;
+                }
+                return false;
+            },
+
+            isDeepBg(index) {
+                const actIndex = this.currentIndex === index;
+                const style = this.getThemeStyle();
+                if (actIndex && style === 'deep') {
+                    return true;
+                }
+                return false;
+            },
+
+            isFreshBg(index) {
+                const actIndex = this.currentIndex === index;
+                const style = this.getThemeStyle();
+                if (actIndex && style === 'fresh') {
+                    return true;
+                }
+                return false;
+            },
+
             throttle(fn, wait, maxTimelong) {
                 var timeout = null,
                     startTime = Date.parse(new Date());
@@ -230,8 +283,6 @@
             changeIndex() {
                 if (typeof window === "undefined") return;
                 const _this = this;
-                console.log(_this.allH);
-
                 // 目录滚动旋中的样式
                 window.addEventListener(
                     "scroll",
@@ -283,7 +334,7 @@
         }
     };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 
     .post-content {
         margin-top: 40px;
@@ -322,8 +373,9 @@
 
     .post-prev,
     .post-next {
-        font-size: 16px;
+        font-size: 18px;
         display: flex;
+
         i {
             position: relative;
             top: 1px;
@@ -338,12 +390,12 @@
             margin: 0;
             width: 150px;
             height: 20px;
-            font-size: 14px;
+            font-size: 16px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             position: relative;
-            top: 5px;
+            top: 3px;
         }
 
         a:hover,
@@ -356,6 +408,7 @@
 
     .post-next {
         justify-content: flex-end;
+
         p {
             text-align: right;
         }
@@ -366,7 +419,6 @@
         opacity: 0.8;
         display: inline-block;
     }
-
 
     .catalog-title {
         text-align: center;
@@ -389,12 +441,43 @@
         height: 100%;
     }
 
-    .toc-li.active > .toc-link:after {
+    /** classical风格 **/
+    .toc-li.active.classical-theme > .toc-link:after {
         border-left: 3px solid #705959;
         left: 2px;
     }
 
-    .toc-li.active > .toc-link:before {
+    .toc-li.active.classical-theme > .toc-link:before {
+         background: rgba(0, 0, 0, 0.06);
+     }
+
+    /** lively风格 **/
+    .toc-li.active.lively-theme > .toc-link:after {
+        border-left: 3px solid #6A8075;
+        left: 2px;
+    }
+
+    .toc-li.active.lively-theme > .toc-link:before {
+        background: rgba(0, 0, 0, 0.06);
+    }
+
+    /** deep风格 **/
+    .toc-li.active.deep-theme > .toc-link:after {
+        border-left: 3px solid #6C6F86;
+        left: 2px;
+    }
+
+    .toc-li.active.deep-theme > .toc-link:before {
+        background: rgba(0, 0, 0, 0.06);
+    }
+
+    /** fresh风格 **/
+    .toc-li.active.fresh-theme > .toc-link:after {
+        border-left: 3px solid #617B93;
+        left: 2px;
+    }
+
+    .toc-li.active.fresh-theme > .toc-link:before {
         background: rgba(0, 0, 0, 0.06);
     }
 
@@ -415,12 +498,23 @@
                 color: inherit;
             }
 
-            .active a {
+            .active.classical-theme a {
                 color: #705959;
+            }
+
+            .active.lively-theme a {
+                color: #6A8075;
+            }
+
+            .active.deep-theme a {
+                color: #6C6F86;
+            }
+
+            .active.fresh-theme a {
+                color: #617B93;
             }
         }
     }
-
 
     @media only screen and (max-width: 767px) {
 

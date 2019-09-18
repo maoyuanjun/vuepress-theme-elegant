@@ -2,6 +2,18 @@ const path = require('path');
 const moment = require('moment');
 const fs = require('fs');
 
+// 默认标签背景色
+const tagBgColors = [
+    '#DFCCB8',
+    '#A98895',
+    '#6E7F76',
+    '#6C6F84',
+    '#667B91',
+    '#66C67F',
+    "#6C6F84",
+    '#6DD7D3'
+];
+
 module.exports = (options, ctx) => ({
     // 插件
     plugins: [

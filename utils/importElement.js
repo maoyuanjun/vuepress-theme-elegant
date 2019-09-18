@@ -35,7 +35,6 @@ const install = Vue => {
     Vue.use(Timeline);
     Vue.use(TimelineItem);
 };
-
 export default {
     install
 };

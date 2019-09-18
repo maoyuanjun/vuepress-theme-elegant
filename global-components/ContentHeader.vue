@@ -146,7 +146,6 @@
 
                     // 自我介绍
                     case "about":
-                        console.log('about');
                         this.isMain = false;
                         this.isPost = false;
                         this.isTag = false;
@@ -209,7 +208,7 @@
         border-radius: 18px;
         text-align: center;
         display: inline-block;
-        border: 1px solid #715959;
+        border: 1px solid transparent;
         background-color: rgba(0, 0, 0, .2);
     }
 
@@ -219,7 +218,6 @@
         color: #ffffff;
         opacity: 0.5;
         font-size: 14px;
-        /*border: 1px solid red;*/
     }
 
     @media only screen and (max-width: 767px) {
@@ -235,15 +233,11 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .title-prefx-wrap {
             position: relative;
             top: -2px;
             margin: 0 -5px;
         }
     }
-
-
-
 
 </style>

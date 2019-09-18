@@ -1,3 +1,4 @@
 .gitignore
 .huskyrc
-commitlint.config
+commitlint.config.js
+CHANGELOG.md

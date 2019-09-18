@@ -143,6 +143,7 @@
     .post-title-link {
         font-size: 18px;
         color: #222222;
+        opacity: 0.7;
         padding: 2px 0;
     }
 
@@ -207,7 +208,9 @@
                 width: 30px;
             }
             li:not(.disabled).active {
-                background-color: #A98895 !important;
+                background-color: #ffffff !important;
+                opacity: 0.6;
+                color: #000000;
             }
         }
     }

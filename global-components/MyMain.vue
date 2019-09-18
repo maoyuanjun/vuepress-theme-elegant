@@ -8,6 +8,7 @@
 
         <!-- 右边图片信息 -->
         <div v-show="isShow" class="content-right-wrap">
+            <!--<img :src="titleBg" alt="imginfo"/>-->
             <img :src="titleBg" alt="imginfo"/>
         </div>
 
@@ -22,6 +23,9 @@
     </el-main>
 </template>
 <script>
+
+    import themeStyle from '../style/index';
+
     export default {
         name: "Main",
         props: {
@@ -56,9 +60,9 @@
         },
         computed: {
             titleBg() {
-                return this.$themeConfig.titleBg;
+                const style = this.$themeConfig.style || 'classical';
+                return themeStyle[style].headerImg;
             },
-
             whichComponent() {
                 let w = "";
                 if (typeof window === "undefined") {
@@ -131,7 +135,6 @@
 </script>
 <style lang="stylus" scoped>
     .my-main {
-        /*border: 1px solid red;*/
         margin-top: 90px;
         transition: 0.2s ease-in-out;
         padding: 0;
