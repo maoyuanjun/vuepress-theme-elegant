@@ -76,6 +76,8 @@
         },
         computed: {
             title() {
+                let t = "";
+
                 if (this.$route.path === '/') {
                     this.isMain = true;
                     this.isPost = false;
@@ -83,7 +85,7 @@
                     this.isAbout = false;
                     this.isAll = false;
                 }
-                let t = "";
+
                 switch (this.$route.path.slice(1, 6)) {
                     // 主页
                     case "posts":
@@ -161,7 +163,7 @@
                         this.isTag = false;
                         this.isAbout = false;
                         this.isAll = false;
-                        t = this.$site.title || "欢迎光临";
+                        t = this.$themeConfig.author || "欢迎光临";
                         this.description = this.$site.description || "期待与你的交流";
                 }
                 return t;
