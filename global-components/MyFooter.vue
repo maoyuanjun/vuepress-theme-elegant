@@ -38,13 +38,13 @@
                     <span>
                         Power by
                         <a
-                            href="https://vuepress.vuejs.org/zh/"
+                            href="https://v0.vuepress.vuejs.org/zh/"
                             target="_blank"
                         >VuePress</a> Theme
                         <a
-                            href="https://github.com/zhhlwd/vuepress-theme-indigo-material"
+                            href="https://github.com/maoyuanjun/vuepress-theme-elegant"
                             target="_blank"
-                        >indigo material</a>
+                        >elegant</a>
                     </span>
                 </p>
             </el-col>
